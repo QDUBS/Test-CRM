@@ -37,12 +37,38 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 4. **Set up environment variables in a `.env` file**:
 
    ```env
+   FLASK_ENV=
+   FLASK_APP=
+   FLASK_RUN_HOST=
+
+   SECRET_KEY=
+   JWT_SECRET_KEY=
+
+   DATABASE_URL=
+
    HUBSPOT_CLIENT_ID=<client_id>
    HUBSPOT_CLIENT_SECRET=<client_secret>
    HUBSPOT_REFRESH_TOKEN=<refresh_token>
    ```
 
-5. **Access the App**:
+5. **Set up database and make migrations**:
+   - Firstly, ensure that you have a PostgreSQL server running on your local machine
+   - Configure your database credentials in the `.env` file:
+
+     ```
+     DATABASE_URL=postgresql://username:password@host:port/dbname
+     ```
+   
+   - Run alembic to make migrations to the database
+
+   ```
+   alembic revision --autogenerate -m "Description of changes"
+   alembic upgrade head
+   alembic current # Optional
+   alembic downgrade <revision_id> # To revert to a previous migration
+   ```
+
+6. **Access the App**:
    - API available at http://localhost:5000
    - Health check at http://localhost:5000/health
    - Deployed on Amazon EKS: https://elb.ajkdksls.com
@@ -166,7 +192,7 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
    python -m pytest --cov=app          # With coverage
    ```
 
-## Troubleshooting
+## Troubleshooting and Logs
 
 1. **Error 401 - Unauthorized**:
 
@@ -185,11 +211,13 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 
 5. **Test Database Issues**: Delete test.db and restart tests if database errors occur
 
+6. **View Logs**: Logs are available in the `/logs` folder
+
 
 ## Swagger Documentation
 
 The API is documented using Swagger UI. Once you run the app, you can access the interactive Swagger UI at:
 
 ```
-http://localhost:5000/apidocs
+http://localhost:5000/docs
 ```
