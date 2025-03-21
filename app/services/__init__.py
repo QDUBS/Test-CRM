@@ -2,6 +2,7 @@ import requests
 import json
 import logging
 from app.config import Config
+from hubspot import HubSpot
 
 
 logger = logging.getLogger(__name__)
@@ -62,3 +63,8 @@ class HubSpotClient:
                 f"API Request failed for URL: {url}. Status code: {response.status_code}, Response: {response.text}")
 
         return response
+
+    def check_and_refresh_token(self):
+        """Check if the token is valid; refresh if necessary."""
+        if not self.access_token:
+            self.access_token = self._get_access_token()

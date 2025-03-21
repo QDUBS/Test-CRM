@@ -40,7 +40,7 @@ class Validator:
         value = data[field]
         if value is not None and not isinstance(value, expected_type):
             raise ValidationError(
-                {field: f"{field_name} must be a {expected_type.__name__}"})
+                {field: f"{field_name} must be {expected_type.__name__}"})
 
         return True
 

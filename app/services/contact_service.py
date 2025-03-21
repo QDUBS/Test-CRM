@@ -1,65 +1,115 @@
-import requests
-import json
-import time
+from hubspot import HubSpot
+from hubspot.crm.contacts import ApiException
 from app.services import HubSpotClient
+from app.config import Config
+import time
 import logging
 
 logger = logging.getLogger(__name__)
 
 
 class ContactService(HubSpotClient):
+    def __init__(self):
+        # Initialize HubSpot client with OAuth access token
+        super().__init__()
+        self.client = HubSpot(access_token=self.access_token)
+
     def create_or_update_contact(self, data):
         """Create or update a contact in HubSpot."""
-        email = data['email']
+        email = data['properties']['email']
 
-        # First check if the contact already exists
-        existing_contact = self._get_contact_by_email(email)
+        contact_exists = self._get_contact_by_email(email)
 
-        if existing_contact:
+        if contact_exists:
             # If contact exists, update
             logger.info(
                 f"Contact with email {email} exists. Updating contact.")
-            url = f"{self.base_url}/contacts/v1/contact/vid/{existing_contact['vid']}/profile"
-            response = self._make_request('POST', url, data)
+
+            return self._update_contact(contact_exists.id, data)
         else:
-            # If contact does not exist, create new one
+            # If contact does not exist, create a new one
             logger.info(
                 f"Contact with email {email} does not exist. Creating a new contact.")
-            url = f"{self.base_url}/contacts/v1/contact/email/{email}/profile"
-            response = self._make_request('POST', url, data)
-
-        if response.status_code == 200:
-            logger.info(f"Successfully processed contact with email {email}")
-        else:
-            logger.error(
-                f"Failed to process contact with email {email}. Status code: {response.status_code}, Response: {response.text}")
-
-        return response.json()
+            return self._create_contact(data)
 
     def _get_contact_by_email(self, email):
         """Check if the contact exists by email and return the contact if found."""
-        url = f"{self.base_url}/contacts/v1/contact/email/{email}/profile"
-        response = self._make_request('GET', url)
-
-        if response.status_code == 200:
-            return response.json()
-        elif response.status_code == 404:
+        try:
+            # Search API to find a contact by email
+            filter = {
+                "filters": [
+                    {
+                        "propertyName": "email",
+                        "operator": "EQ",
+                        "value": email
+                    }
+                ]
+            }
+            response = self.client.crm.contacts.search_api.do_search(filter)
+            if response.results:
+                # Return the first result
+                contact = response.results[0]
+                return contact
             return None
-        else:
-            # Log error if there is an issue
+        except ApiException as e:
             logger.error(
-                f"Error fetching contact by email {email}. Status code: {response.status_code}, Response: {response.text}")
+                f"Error fetching contact by email {email}. Status code: {e.status}, Response: {e.body}")
             return None
+
+    def _create_contact(self, data):
+        """Create a new contact in HubSpot."""
+        contact_data = {
+            "properties": {
+                "email": data['properties']['email'],
+                "firstname": data['properties'].get('firstname'),
+                "lastname": data['properties'].get('lastname'),
+                "phone": data['properties'].get('phone')
+            }
+        }
+        try:
+            # Create a contact
+            response = self.client.crm.contacts.basic_api.create(contact_data)
+            logger.info(
+                f"Successfully created contact with email {data['properties']['email']}")
+            return response
+        except ApiException as e:
+            logger.error(
+                f"Failed to create contact. Status code: {e.status}, Response: {e.body}")
+            raise
+
+    def _update_contact(self, contact_id, data):
+        """Update an existing contact in HubSpot."""
+        contact_data = {
+            "properties": {
+                "email": data['properties']['email'],
+                "firstname": data['properties']['firstname'],
+                "lastname": data['properties']['lastname'],
+                "phone": data['properties']['phone']
+            }
+        }
+        try:
+            # Update the contact
+            response = self.client.crm.contacts.basic_api.update(
+                contact_id, contact_data)
+            logger.info(
+                f"Successfully updated contact with email {data['properties']['email']}")
+            return response.to_dict()
+        except ApiException as e:
+            logger.error(
+                f"Failed to update contact. Status code: {e.status}, Response: {e.body}")
+            raise
 
     def get_recent_contacts(self, page, page_size):
         """Retrieve recently created contacts."""
-        url = f"{self.base_url}/contacts/v1/lists/all/contacts/recent"
-        params = {
-            'count': page_size,
-            'vidOffset': page * page_size,
-        }
-        response = self._make_request('GET', url)
-        return response.json()
+        try:
+            # Retrieve the most recent contacts
+            response = self.client.crm.contacts.basic_api.get_page(
+                limit=page_size, after=page * page_size)
+            return response.results
+        except ApiException as e:
+            logger.error(
+                f"Error fetching recent contacts. Status code: {e.status}, Response: {e.body}")
+            return []
 
     def handle_rate_limit(self, response):
         """Handle rate limits using exponential backoff."""

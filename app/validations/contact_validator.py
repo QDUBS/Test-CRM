@@ -7,9 +7,15 @@ class ContactValidator(Validator):
     @classmethod
     def validate_registration(cls, data):
 
-        # Check required fields
+        # Ensure the 'properties' key exists
+        if 'properties' not in data:
+            raise ValidationError("Missing 'properties' in payload")
+
+        properties = data['properties']
+
+        # Check required fields inside 'properties'
         cls.validate_required(
-            data, ["email", "firstname", "lastname", "phone"])
+            properties, ["email", "firstname", "lastname", "phone"])
 
         # Validate email
         cls.validate_length(
@@ -30,6 +36,6 @@ class ContactValidator(Validator):
         cls.validate_length(
             data, "phone", min_length=8, max_length=13
         )
-        cls.validate_type(data, "phone", int, field_name="Phone")
+        cls.validate_type(data, "phone", str, field_name="Phone")
 
         return True

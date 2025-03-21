@@ -110,12 +110,13 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 
   ```
   {
-     "email": "john.doe@example.com",
-     "firstname": "John",
-     "lastname": "Doe",
-     "phone": "+1234567890",
-     "company": "Doe Enterprises"
-  }
+      "properties": {
+         "email": "superjones@gmail.com",
+         "firstname": "Jones",
+         "lastname": "Moore",
+         "phone": "+1234567890"
+      }
+   }
   ```
 
   **Request Body**: Returns the created or updated contact object.
@@ -128,11 +129,15 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 
   ```
   {
-     "dealname": "New Business Deal",
-     "amount": 5000,
-     "dealstage": "qualification",
-     "contact_id": 12345
-  }
+      "properties": {
+         "dealname": "Acme Corporation - Subscription Renewal",
+         "amount": 1500,
+         "pipeline": "default",
+         "dealstage": "appointmentscheduled",
+         "description": "Annual subscription renewal for Acme Corporation.",
+         "contact_id": "12345"
+      }
+   }
   ```
 
   **Request Body**: Returns the created or updated deal object.
@@ -145,15 +150,30 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 
   ```
   {
-     "subject": "Issue with payment",
-     "description": "Customer facing issues while making payment.",
-     "category": "billing",
-     "pipeline": "support_pipeline",
-     "hs_ticket_priority": "high",
-     "hs_pipeline_stage": "new",
-     "contact_id": 12345,
-     "deal_ids": [54321]
-  }
+      "properties": {
+         "subject": "Support Ticket Subject",
+         "description": "Ticket Description",
+         "category": "Category",
+         "pipeline": "0",  // assuming pipelineId=0 is correct for your use case
+         "hs_ticket_priority": "HIGH",
+         "hs_pipeline_stage": "1",  // Valid stage ID (1, 2, 3, or 4)
+         "hs_pipeline": "0",
+         "contact_id": "107739060800"
+      },
+      "associations": [
+         {
+            "to": {
+            "id": "107739060800"
+            },
+            "types": [
+            {
+               "associationCategory": "HUBSPOT_DEFINED",
+               "associationTypeId": 16
+            }
+            ]
+         }
+      ]
+   }
   ```
 
   **Request Body**: Returns the created support ticket object.

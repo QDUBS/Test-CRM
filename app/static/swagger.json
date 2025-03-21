@@ -5,6 +5,19 @@
     "description": "API for managing contacts, deals, support tickets, and authentication in HubSpot.",
     "version": "1.0.0"
   },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Enter your login token here"
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ], 
   "basePath": "/api",
   "paths": {
     "/create_contact": {

@@ -22,7 +22,7 @@ def create_app(config_class=None):
         API_URL,
         config={
             'app_name': "Hubspot CRM API",
-            'swagger_ui': True
+            'swagger_ui': True,
         }
     )
 
