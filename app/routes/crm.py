@@ -10,10 +10,10 @@ from ..validations.support_ticket_validator import SupportTicketValidator
 from ..validations.base import validate_request
 
 # Initialize blueprint for CRM routes
-crm_bp = Blueprint('api', __name__, url_prefix='/api')
+crm_bp = Blueprint('crm_bp', __name__)
 logger = logging.getLogger(__name__)
 
-# Instantiate services
+# Instantiate services 
 contact_service = ContactService()
 deal_service = DealService()
 ticket_service = SupportTicketService()

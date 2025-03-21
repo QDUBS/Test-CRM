@@ -46,8 +46,8 @@ def create_app(config_class=None):
     app.wsgi_app = LoggingMiddleware(app.wsgi_app)
 
     # Register blueprints
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(crm_bp)
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(crm_bp, url_prefix='/api')
     app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
     @app.route("/health")

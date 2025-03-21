@@ -7,7 +7,7 @@
   },
   "basePath": "/api",
   "paths": {
-    "/api/create_contact": {
+    "/create_contact": {
       "post": {
         "summary": "Create or update a contact",
         "description": "Create a new contact or update an existing contact in HubSpot.",
@@ -29,7 +29,7 @@
         }
       }
     },
-    "/api/create_deal": {
+    "/create_deal": {
       "post": {
         "summary": "Create or update a deal",
         "description": "Create a new deal or update an existing deal in HubSpot.",
@@ -51,7 +51,7 @@
         }
       }
     },
-    "/api/create_ticket": {
+    "/create_ticket": {
       "post": {
         "summary": "Create a support ticket",
         "description": "Create a new support ticket in HubSpot.",
@@ -107,7 +107,7 @@
         }
       }
     },
-    "/api/register": {
+    "/auth/register": {
       "post": {
         "summary": "Register a new user",
         "description": "Create a new user account.",
@@ -132,7 +132,7 @@
         }
       }
     },
-    "/api/login": {
+    "/auth/login": {
       "post": {
         "summary": "User login",
         "description": "Authenticate and log in a user, returning a JWT access token.",

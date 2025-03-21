@@ -70,6 +70,7 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 
 6. **Access the App**:
    - API available at http://localhost:5000
+   - Swagger Documentation available at http://localhost:5000/docs
    - Health check at http://localhost:5000/health
 
 

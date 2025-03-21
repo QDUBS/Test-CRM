@@ -15,9 +15,9 @@ def register():
     data = request.get_json()
     user_repo = UserRepository()
     
-    try:
+    try: 
         # Check if user already exists
-        existing_user = user_repo.get_by_username(data['username'])
+        existing_user = user_repo.get_user(data['username'])
         if existing_user:
             logger.warning(f"Trying to register new user with existing username: {data['username']}")
             return jsonify({'error': 'This username already exists'}), 409
