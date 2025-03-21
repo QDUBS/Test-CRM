@@ -3,7 +3,7 @@ services:
     build: .
     container_name: hubspot-crm
     ports:
-      - "5000:5000"
+      - "5055:5055"
     environment:
       - FLASK_ENV=development
       - FLASK_APP=run.py
