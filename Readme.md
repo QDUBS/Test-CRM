@@ -71,7 +71,6 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 6. **Access the App**:
    - API available at http://localhost:5000
    - Health check at http://localhost:5000/health
-   - Deployed on Amazon EKS: https://elb.ajkdksls.com
 
 
 ## Dockerisation and Deployment
@@ -163,8 +162,8 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
   **Method**: GET
   **Description**: Get a list of recent CRM objects (contacts, deals, tickets).
   **Query Parameters**:
-  - page: The page number (default: 1)
-  - page_size: The number of items per page (default: 10)
+  - `page`: The page number (default: 1)
+  - `page_size`: The number of items per page (default: 10)
     **Response**: Returns a JSON object containing the recent contacts, deals, and tickets.
 
 ## Running Tests
@@ -196,7 +195,7 @@ This project leverages Flask for the backend and integrates with HubSpot's CRM s
 
 1. **Error 401 - Unauthorized**:
 
-   - Check if your HUBSPOT_CLIENT_ID, HUBSPOT_CLIENT_SECRET, and HUBSPOT_REFRESH_TOKEN are correct.
+   - Check if your `HUBSPOT_CLIENT_ID`, `HUBSPOT_CLIENT_SECRET`, and `HUBSPOT_REFRESH_TOKEN` are correct.
    - The access token may have expired. The app automatically handles token refresh, but check the logs for any issues.
 
 2. **Error 400 - Bad Request**:
