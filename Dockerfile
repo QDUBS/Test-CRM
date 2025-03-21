@@ -46,4 +46,4 @@ USER appuser
 EXPOSE 5000
 
 # Command to run the application
-CMD ["python", "run:app", "--bind", "0.0.0.0:5000","--access-logfile", "-"]
+CMD ["python", "run.py", "--bind", "0.0.0.0:5000","--access-logfile", "-"]
