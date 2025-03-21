@@ -9,7 +9,7 @@ from ..validations.deal_validator import DealValidator
 from ..validations.support_ticket_validator import SupportTicketValidator
 from ..validations.base import validate_request
 
-# Initialize blueprint for CRM routes
+# Initialize blueprint for Integration routes
 integration_bp = Blueprint('integration_bp', __name__)
 logger = logging.getLogger(__name__)
 
