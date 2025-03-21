@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 from flask_swagger_ui import get_swaggerui_blueprint
 from .models import db
 from .utils.logging import configure_logging
-from .routes.crm import crm_bp
+from .routes.integration import integration_bp
 from .routes.auth import auth_bp
 from .middleware.logging import LoggingMiddleware
 
@@ -47,7 +47,7 @@ def create_app(config_class=None):
 
     # Register blueprints
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
-    app.register_blueprint(crm_bp, url_prefix='/api')
+    app.register_blueprint(integration_bp, url_prefix='/api')
     app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
     @app.route("/health")

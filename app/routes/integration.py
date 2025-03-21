@@ -10,7 +10,7 @@ from ..validations.support_ticket_validator import SupportTicketValidator
 from ..validations.base import validate_request
 
 # Initialize blueprint for CRM routes
-crm_bp = Blueprint('crm_bp', __name__)
+integration_bp = Blueprint('integration_bp', __name__)
 logger = logging.getLogger(__name__)
 
 # Instantiate services 
@@ -19,7 +19,7 @@ deal_service = DealService()
 ticket_service = SupportTicketService()
 
 
-@crm_bp.route('/create_contact', methods=['POST'])
+@integration_bp.route('/create_contact', methods=['POST'])
 # @auth_middleware()
 @validate_request(ContactValidator.validate_registration)
 def create_or_update_contact():
@@ -33,7 +33,7 @@ def create_or_update_contact():
         return jsonify({"Error": str(e)}), 400
 
 
-@crm_bp.route('/create_deal', methods=['POST'])
+@integration_bp.route('/create_deal', methods=['POST'])
 # @auth_middleware()
 @validate_request(DealValidator.validate_create_deal)
 def create_or_update_deal():
@@ -47,7 +47,7 @@ def create_or_update_deal():
         return jsonify({"Error": str(e)}), 400
 
 
-@crm_bp.route('/create_ticket', methods=['POST'])
+@integration_bp.route('/create_ticket', methods=['POST'])
 # @auth_middleware()
 @validate_request(SupportTicketValidator.validate_create_support_ticket)
 def create_ticket():
@@ -61,7 +61,7 @@ def create_ticket():
         return jsonify({"Error": str(e)}), 400
 
 
-@crm_bp.route('/new_crm_objects', methods=['GET'])
+@integration_bp.route('/new_crm_objects', methods=['GET'])
 # @auth_middleware()
 def get_new_crm_objects():
     page = int(request.args.get('page', 1))

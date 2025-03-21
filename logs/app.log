@@ -2531,3 +2531,17 @@
 {"timestamp": "2025-03-21 11:10:02,280", "level": "INFO", "name": "app", "message": "Logging configured at level: INFO"}
 {"timestamp": "2025-03-21 11:10:02,430", "level": "WARNING", "name": "werkzeug", "message": " * Debugger is active!"}
 {"timestamp": "2025-03-21 11:10:02,463", "level": "INFO", "name": "werkzeug", "message": " * Debugger PIN: 665-438-654"}
+{"timestamp": "2025-03-21 14:50:25,289", "level": "INFO", "name": "werkzeug", "message": " * Detected change in '/Users/confidence/Documents/Work/SavannahTech/hubspot-crm-integration/app/__init__.py', reloading"}
+{"timestamp": "2025-03-21 14:50:27,020", "level": "INFO", "name": "werkzeug", "message": " * Restarting with stat"}
+{"timestamp": "2025-03-21 14:50:34,660", "level": "INFO", "name": "app", "message": "Logging configured at level: INFO"}
+{"timestamp": "2025-03-21 14:50:34,848", "level": "WARNING", "name": "werkzeug", "message": " * Debugger is active!"}
+{"timestamp": "2025-03-21 14:50:34,890", "level": "INFO", "name": "werkzeug", "message": " * Debugger PIN: 665-438-654"}
+{"timestamp": "2025-03-21 14:50:47,297", "level": "INFO", "name": "werkzeug", "message": " * Detected change in '/Users/confidence/Documents/Work/SavannahTech/hubspot-crm-integration/app/routes/integration.py', reloading"}
+{"timestamp": "2025-03-21 14:50:47,990", "level": "INFO", "name": "werkzeug", "message": " * Restarting with stat"}
+{"timestamp": "2025-03-21 14:51:28,851", "level": "INFO", "name": "app", "message": "Logging configured at level: INFO"}
+{"timestamp": "2025-03-21 14:51:29,017", "level": "INFO", "name": "werkzeug", "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://192.168.0.145:5000"}
+{"timestamp": "2025-03-21 14:51:29,018", "level": "INFO", "name": "werkzeug", "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"}
+{"timestamp": "2025-03-21 14:51:29,062", "level": "INFO", "name": "werkzeug", "message": " * Restarting with stat"}
+{"timestamp": "2025-03-21 14:51:34,186", "level": "INFO", "name": "app", "message": "Logging configured at level: INFO"}
+{"timestamp": "2025-03-21 14:51:34,351", "level": "WARNING", "name": "werkzeug", "message": " * Debugger is active!"}
+{"timestamp": "2025-03-21 14:51:34,378", "level": "INFO", "name": "werkzeug", "message": " * Debugger PIN: 665-438-654"}
