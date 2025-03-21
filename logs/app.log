@@ -1199,3 +1199,8 @@
 {"timestamp": "2025-03-21 03:33:52,368", "level": "ERROR", "name": "app.routes.auth", "message": "Error during user registration: (psycopg2.OperationalError) could not translate host name \"db\" to address: nodename nor servname provided, or not known\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)", "request": {"url": "http://localhost:5000/api/auth/register", "method": "POST", "remote_addr": "127.0.0.1"}}
 {"timestamp": "2025-03-21 03:33:52,369", "level": "ERROR", "name": "app.middleware.logging", "message": "Request processed: {'method': 'POST', 'path': '/api/auth/register', 'status': 500, 'duration_ms': 1635.4}", "request": {"url": "http://localhost:5000/api/auth/register", "method": "POST", "remote_addr": "127.0.0.1"}}
 {"timestamp": "2025-03-21 03:33:52,374", "level": "INFO", "name": "werkzeug", "message": "127.0.0.1 - - [21/Mar/2025 03:33:52] \"\u001b[35m\u001b[1mPOST /api/auth/register HTTP/1.1\u001b[0m\" 500 -"}
+{"timestamp": "2025-03-21 03:44:52,488", "level": "INFO", "name": "werkzeug", "message": " * Detected change in '/Users/confidence/Documents/Work/SavannahTech/hubspot-crm-integration/app/routes/auth.py', reloading"}
+{"timestamp": "2025-03-21 03:44:53,045", "level": "INFO", "name": "werkzeug", "message": " * Restarting with stat"}
+{"timestamp": "2025-03-21 03:44:58,790", "level": "INFO", "name": "app", "message": "Logging configured at level: INFO"}
+{"timestamp": "2025-03-21 03:44:58,887", "level": "WARNING", "name": "werkzeug", "message": " * Debugger is active!"}
+{"timestamp": "2025-03-21 03:44:58,923", "level": "INFO", "name": "werkzeug", "message": " * Debugger PIN: 665-438-654"}

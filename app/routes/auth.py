@@ -41,7 +41,7 @@ def login():
     
     try:
         # Check if user exists
-        user = user_repo.get_by_username(data['username'])
+        user = user_repo.get_user(data['username'])
         if not user or not user.check_password(data['password']):
             logger.warning(f"Failed login attempt for username: {data['username']}")
             return jsonify({'error': 'Invalid username or password'}), 401
